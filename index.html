@@ -1,0 +1,1161 @@
+<html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>家中美味，亮丽而行 - 家庭在线订餐</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- AOS - Animate On Scroll -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  
+  <!-- EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF6B6B',
+            secondary: '#4ECDC4',
+            dark: '#292F36',
+            light: '#F7FFF7',
+            gray: '#6C757D'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .card-hover {
+        @apply transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1;
+      }
+      .btn-primary {
+        @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50;
+      }
+      .btn-secondary {
+        @apply bg-white text-primary border border-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50;
+      }
+      .btn-outline {
+        @apply bg-white text-dark border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50;
+      }
+      .countdown {
+        @apply font-mono text-lg font-bold;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- 导航栏 -->
+  <header class="bg-white shadow-md sticky top-0 z-40">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center">
+        <i class="fa fa-cutlery text-primary text-2xl mr-2"></i>
+        <h1 class="text-xl font-bold text-dark">家中美味</h1>
+      </div>
+      
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="#" class="text-dark hover:text-primary transition-colors">首页</a>
+        <a href="#menu" class="text-dark hover:text-primary transition-colors">菜单</a>
+        <a href="#about" class="text-dark hover:text-primary transition-colors">关于我们</a>
+        <a href="#contact" class="text-dark hover:text-primary transition-colors">联系我们</a>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <button id="cart-btn" class="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
+            <i class="fa fa-shopping-cart text-dark"></i>
+            <span id="cart-count" class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+          </button>
+        </div>
+        
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors">
+          <i class="fa fa-bars text-dark"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="container mx-auto px-4 py-2 flex flex-col space-y-2">
+        <a href="#" class="py-2 text-dark hover:text-primary transition-colors">首页</a>
+        <a href="#menu" class="py-2 text-dark hover:text-primary transition-colors">菜单</a>
+        <a href="#about" class="py-2 text-dark hover:text-primary transition-colors">关于我们</a>
+        <a href="#contact" class="py-2 text-dark hover:text-primary transition-colors">联系我们</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 英雄区域 -->
+  <section class="relative h-[280px] overflow-hidden">
+    <img src="https://p3-doubao-search-sign.byteimg.com/labis/00edf276ac6f15880f977e35642199b9~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1790432645&amp;x-signature=8WiP2PN7ffZecVpFXDm9Ym6KQVQ%3D" alt="红烧肉" class="w-full h-full object-cover">
+    <div class="absolute inset-0 bg-dark bg-opacity-50 flex flex-col justify-center items-center text-center px-4">
+      <h2 class="text-4xl font-bold text-white mb-4" style="font-size: 36px;">家中美味，亮丽而行</h2>
+      <p class="text-xl text-white mb-6 max-w-md">家常菜的味道，专业的烹饪，为您的舌尖带来美味体验</p>
+      <a href="#menu" class="btn-primary px-8 py-3 text-lg">立即点餐</a>
+    </div>
+  </section>
+
+  <!-- 主要内容 -->
+  <main class="container mx-auto px-4 py-8">
+    <!-- 菜单区域 -->
+    <section id="menu" class="mb-12">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-dark mb-2">我们的菜单</h2>
+        <p class="text-gray">精心准备的家常菜，满足您的味蕾需求</p>
+      </div>
+      
+      <!-- 分类标签 -->
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <button class="category-btn active whitespace-nowrap px-6 py-2 rounded-full bg-primary text-white" data-category="all">
+          全部
+        </button>
+        <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full bg-gray-200 hover:bg-gray-300" data-category="hot">
+          热菜
+        </button>
+        <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full bg-gray-200 hover:bg-gray-300" data-category="cold">
+          凉菜
+        </button>
+        <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full bg-gray-200 hover:bg-gray-300" data-category="soup">
+          汤类
+        </button>
+        <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full bg-gray-200 hover:bg-gray-300" data-category="staple">
+          主食
+        </button>
+      </div>
+      
+      <!-- 菜单列表 -->
+      <div id="menu-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- 菜单将通过JavaScript动态生成 -->
+      </div>
+    </section>
+    
+    <!-- 关于我们 -->
+    <section id="about" class="mb-12">
+      <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="md:flex">
+          <div class="md:w-1/2">
+            <img src="https://p3-doubao-search-sign.byteimg.com/labis/45642fc8bd936d6daae5d801440c9168~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&amp;x-expires=1790432609&amp;x-signature=Rmuyt7gh%2B4gAQw6tR2rk%2Fbp0GUs%3D" alt="辣椒炒肉" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6 md:w-1/2">
+            <h2 class="text-2xl font-bold text-dark mb-4">关于我们</h2>
+            <p class="text-gray mb-4">家中美味成立于2026年，致力于为忙碌的家庭提供健康、美味、便捷的家常菜点餐服务。我们的厨师有多年餐饮经验，从上研一就开始学习烹饪，用心烹饪每一道菜品，让丽姐在家也能享受到餐厅级的美食体验。</p>
+            <p class="text-gray mb-4">我们坚持使用新鲜食材，拒绝添加剂，让您吃得放心、安心、舒心。</p>
+            <div class="flex items-center space-x-4 mt-6">
+              <div class="flex items-center">
+                <i class="fa fa-check-circle text-primary mr-2"></i>
+                <span class="text-gray">新鲜食材</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fa fa-check-circle text-primary mr-2"></i>
+                <span class="text-gray">专业烹饪</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fa fa-check-circle text-primary mr-2"></i>
+                <span class="text-gray">快速配送</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 联系我们 -->
+    <section id="contact" class="mb-12">
+      <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold text-dark mb-4">联系我们</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="flex items-start">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fa fa-map-marker text-primary"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-dark mb-1">地址</h3>
+                <p class="text-gray">未来的家</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fa fa-phone text-primary"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-dark mb-1">电话</h3>
+                <p class="text-gray">19937415910</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                <i class="fa fa-envelope text-primary"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-dark mb-1">邮箱</h3>
+                <p class="text-gray">www.weilaidejia1023.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6">
+            <h3 class="font-semibold text-dark mb-2">营业时间</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="flex justify-between">
+                <span class="text-gray">周一至周五</span>
+                <span class="text-dark">10:00 - 22:00</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray">周六至周日</span>
+                <span class="text-dark">09:00 - 23:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-lg font-bold mb-4">家中美味</h3>
+          <p class="text-gray-400">为您的家庭提供健康、美味、便捷的家常菜d点餐服务。</p>
+          <div class="flex space-x-4 mt-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-weixin text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-weibo text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fa fa-qq text-xl"></i>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+            <li><a href="#menu" class="text-gray-400 hover:text-white transition-colors">菜单</a></li>
+            <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">联系我们</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-4">热门菜品</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">红烧肉</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">宫保鸡丁</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">可乐鸡翅</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">乌鸡汤</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-4">订阅我们</h3>
+          <p class="text-gray-400 mb-4">订阅我们的 newsletter，获取最新优惠和活动信息。</p>
+          <form class="flex">
+            <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 rounded-l-lg focus:outline-none flex-1">
+            <button type="submit" class="bg-primary text-white px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition-all">
+              <i class="fa fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
+        <p>© 2025 家中美味. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 购物车抽屉 -->
+  <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-xl z-50 flex flex-col transform translate-x-full transition-transform duration-300">
+    <div class="p-4 border-b flex justify-between items-center">
+      <h2 class="text-xl font-bold">购物车</h2>
+      <button id="close-cart-btn" class="p-2 rounded-full hover:bg-gray-100">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    
+    <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4">
+      <!-- 购物车为空状态 -->
+      <div id="empty-cart" class="flex flex-col items-center justify-center h-full">
+        <i class="fa fa-shopping-cart text-gray-300 text-5xl mb-4"></i>
+        <p class="text-gray-500">购物车还是空的</p>
+        <button id="start-shopping-btn" class="btn-primary mt-4">开始购物</button>
+      </div>
+      
+      <!-- 购物车商品列表 -->
+      <div id="cart-list" class="hidden space-y-4">
+        <!-- 购物车商品将通过JavaScript动态生成 -->
+      </div>
+    </div>
+    
+    <div id="cart-summary" class="hidden p-4 border-t">
+      <div class="flex justify-between mb-2">
+        <span>商品总价</span>
+        <span id="subtotal">¥0.00</span>
+      </div>
+      <div class="flex justify-between mb-2">
+        <span>配送费</span>
+        <span id="delivery-fee">¥0.00</span>
+      </div>
+      <div class="flex justify-between font-bold text-lg mt-4">
+        <span>总计</span>
+        <span id="total">¥0.00</span>
+      </div>
+      <button id="checkout-btn" class="btn-primary w-full mt-4 py-3">去结算</button>
+    </div>
+  </div>
+
+  <!-- 结算模态框 -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black bg-opacity-50" id="modal-overlay"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
+      <div class="p-4 border-b flex justify-between items-center">
+        <h2 class="text-xl font-bold">结算</h2>
+        <button id="close-checkout-btn" class="p-2 rounded-full hover:bg-gray-100">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="p-4">
+        <!-- 送餐地址 -->
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2">送餐地址</label>
+          <input type="text" id="delivery-address" placeholder="请输入您的详细地址" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+        
+        <!-- 送餐时间 -->
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2">送餐时间</label>
+          <div class="grid grid-cols-2 gap-2">
+            <input type="date" id="delivery-date" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+            <input type="time" id="delivery-time" class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+          </div>
+        </div>
+        
+        <!-- 联系方式 -->
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2">联系方式</label>
+          <input type="tel" id="contact-phone" placeholder="请输入您的手机号码" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+        </div>
+        
+        <!-- 备注 -->
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2">备注</label>
+          <textarea id="order-notes" placeholder="如有特殊要求，请在此说明" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" rows="3"></textarea>
+        </div>
+        
+        <!-- 订单摘要 -->
+        <div class="bg-gray-50 p-4 rounded-lg mb-4">
+          <h3 class="font-semibold mb-2">订单摘要</h3>
+          <div class="space-y-2">
+            <div class="flex justify-between">
+              <span>商品总价</span>
+              <span id="checkout-subtotal">¥0.00</span>
+            </div>
+            <div class="flex justify-between">
+              <span>配送费</span>
+              <span id="checkout-delivery-fee">¥0.00</span>
+            </div>
+            <div class="border-t border-gray-300 my-2"></div>
+            <div class="flex justify-between font-bold">
+              <span>总计</span>
+              <span id="checkout-total">¥0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="p-4 border-t flex justify-end">
+        <button id="place-order-btn" class="btn-primary px-6 py-2">提交订单</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 订单确认模态框 -->
+  <div id="order-confirm-modal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
+      <div class="p-6 text-center">
+        <div class="bg-green-100 text-green-500 p-4 rounded-full inline-block mb-4">
+          <i class="fa fa-check-circle text-4xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold mb-2">订单提交成功</h2>
+        <p class="text-gray-600 mb-4">您的订单已成功提交，我们将尽快为您配送</p>
+        
+        <div class="bg-gray-50 rounded-lg p-4 mb-6">
+          <p class="text-gray-700 mb-2">订单将在 <span id="order-countdown" class="countdown">15:00</span> 后自动确认</p>
+          <div class="w-full bg-gray-200 rounded-full h-2.5">
+            <div id="order-progress" class="bg-primary h-2.5 rounded-full" style="width: 100%"></div>
+          </div>
+        </div>
+        
+        <div class="flex space-x-4">
+          <button id="cancel-order-btn" class="btn-secondary flex-1">取消订单</button>
+          <button id="view-order-btn" class="btn-primary flex-1">查看订单</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 遮罩层 -->
+  <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+  <script>
+    // 初始化AOS动画库
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        once: true
+      });
+      
+      // 初始化EmailJS
+      try {
+        emailjs.init('DL2QNDa24JMsFVCnv');
+      } catch (error) {
+        console.log('EmailJS初始化失败:', error);
+      }
+      
+      // 设置默认配送日期为今天
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('delivery-date').value = today;
+      
+      // 设置默认配送时间为当前时间后30分钟
+      const now = new Date();
+      now.setMinutes(now.getMinutes() + 30);
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      document.getElementById('delivery-time').value = `${hours}:${minutes}`;
+      
+      // 初始化菜单
+      initializeMenu();
+      
+      // 初始化事件监听
+      initializeEventListeners();
+    });
+
+    // 菜单数据
+    const menuItems = [
+      // 热菜
+      {
+        id: 1,
+        name: '西红柿炒鸡蛋',
+        category: 'hot',
+        price: 18.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/labis/image/65f74bd675dc113d0d3d64b945579e31~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432609&x-signature=YmIYNOonUpTXgl1h%2FF9VGVGkz30%3D',
+        description: '经典家常菜，酸甜可口',
+        rating: 4.8,
+        reviewCount: 325
+      },
+      {
+        id: 2,
+        name: '酸辣土豆丝',
+        category: 'hot',
+        price: 16.0,
+        image: 'https://p11-doubao-search-sign.byteimg.com/labis/2db57a4e7af7ca7fe17831353ce078f9~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432609&x-signature=sD0oPQYigkLItyUo%2F7GeJG5BIOk%3D',
+        description: '酸辣爽口，开胃下饭',
+        rating: 4.6,
+        reviewCount: 289
+      },
+      {
+        id: 3,
+        name: '爆蛋',
+        category: 'hot',
+        price: 15.0,
+        image: 'https://p26-doubao-search-sign.byteimg.com/tos-cn-i-6w9my0ksvp/e1990de8c8a74f2eb8a43f80cce80496~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432629&x-signature=RjjQ0rn%2BFejiEcO8Y5fjIAkTxO8%3D',
+        description: '外酥里嫩，口感丰富',
+        rating: 4.5,
+        reviewCount: 178
+      },
+      {
+        id: 4,
+        name: '辣椒炒肉',
+        category: 'hot',
+        price: 28.0,
+        image: 'https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1172937753079447556~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432609&x-signature=4L4S14uPJyzpSRqQNgP2PGtm5sQ%3D',
+        description: '香辣可口，肉质鲜嫩',
+        rating: 4.7,
+        reviewCount: 245
+      },
+      {
+        id: 5,
+        name: '土豆片炒肉',
+        category: 'hot',
+        price: 22.0,
+        image: 'https://p26-doubao-search-sign.byteimg.com/labis/28ad937e41c9eb906249836d4ca492d1~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432630&x-signature=Tb%2BPm5DwNiafI7vhxoxnkoACqOE%3D',
+        description: '土豆软糯，肉片鲜香',
+        rating: 4.4,
+        reviewCount: 198
+      },
+      {
+        id: 6,
+        name: '芹菜炒牛肉',
+        category: 'hot',
+        price: 32.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1904471134258987016~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432629&x-signature=ZfA58TLZCgXZv4fPuaZLEqLGT%2BI%3D',
+        description: '芹菜脆嫩，牛肉滑嫩',
+        rating: 4.6,
+        reviewCount: 210
+      },
+      {
+        id: 7,
+        name: '红烧肉',
+        category: 'hot',
+        price: 38.0,
+        image: 'https://p11-doubao-search-sign.byteimg.com/labis/00edf276ac6f15880f977e35642199b9~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432645&x-signature=8WiP2PN7ffZecVpFXDm9Ym6KQVQ%3D',
+        description: '肥而不腻，入口即化',
+        rating: 4.9,
+        reviewCount: 356
+      },
+      {
+        id: 8,
+        name: '三杯鸡',
+        category: 'hot',
+        price: 35.0,
+        image: 'https://p26-doubao-search-sign.byteimg.com/labis/c55492bac3f62945ad8fbe313edbeb68~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432645&x-signature=6altV5fQsIS1%2Fmj9sWy49fK%2F0AM%3D',
+        description: '香气四溢，口感丰富',
+        rating: 4.7,
+        reviewCount: 278
+      },
+      {
+        id: 9,
+        name: '酸菜炖五花肉',
+        category: 'hot',
+        price: 32.0,
+        image: 'https://p26-doubao-search-sign.byteimg.com/labis/8952ccb1cfafe43979dfcc72754b4cc8~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432646&x-signature=DDEu47IG0%2B%2F3RQn0FesrJz148hE%3D',
+        description: '酸菜爽口，五花肉香而不腻',
+        rating: 4.5,
+        reviewCount: 234
+      },
+      {
+        id: 10,
+        name: '炒青菜',
+        category: 'hot',
+        price: 12.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1094284815851585539~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432660&x-signature=W%2BEMuqh8AW1nGxQsUV0jv%2Bu8K8o%3D',
+        description: '清爽可口，营养健康',
+        rating: 4.3,
+        reviewCount: 187
+      },
+      {
+        id: 11,
+        name: '可乐鸡翅',
+        category: 'hot',
+        price: 36.0,
+        image: 'https://p11-doubao-search-sign.byteimg.com/labis/f8619a3a6d394d9a98e03baf9f44b2ef~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432660&x-signature=b7C7AYlzi1o8uYmnoM8MHvs%2BhQ0%3D',
+        description: '甜香可口，肉质鲜嫩',
+        rating: 4.8,
+        reviewCount: 312
+      },
+      {
+        id: 12,
+        name: '地三鲜',
+        category: 'hot',
+        price: 24.0,
+        image: 'https://p26-doubao-search-sign.byteimg.com/labis/7364cc85816b562362796c1bf5924cab~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432660&x-signature=8rZ62zpFvzEBKuq6F6bI2u2b1kY%3D',
+        description: '土豆、茄子、青椒的完美搭配',
+        rating: 4.5,
+        reviewCount: 223
+      },
+      {
+        id: 13,
+        name: '宫保鸡丁',
+        category: 'hot',
+        price: 28.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1863344623430795278~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432680&x-signature=6p2cQh7y%2BAP1Sk94xz1k%2F0xse44%3D',
+        description: '香辣可口，花生酥脆',
+        rating: 4.7,
+        reviewCount: 298
+      },
+      {
+        id: 14,
+        name: '排骨',
+        category: 'hot',
+        price: 48.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/labis/a485d368771bdc643f768b04b1c5ce40~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432680&x-signature=gZivnc7DSYhS7CBYN2oGTLV0yOg%3D',
+        description: '肉质鲜嫩，香气四溢',
+        rating: 4.8,
+        reviewCount: 345
+      },
+      {
+        id: 15,
+        name: '木须肉',
+        category: 'hot',
+        price: 26.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1722776356777099276~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432680&x-signature=yqdPBaDHkf3Zd2a8Ke%2ByT5cRc7w%3D',
+        description: '经典家常菜，营养均衡',
+        rating: 4.6,
+        reviewCount: 256
+      },
+      
+      // 凉菜
+      {
+        id: 16,
+        name: '拍黄瓜',
+        category: 'cold',
+        price: 12.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1510750082139160576~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432716&x-signature=5QbyRZrQrkstwIi069eGizgzvaQ%3D',
+        description: '清爽可口，开胃解腻',
+        rating: 4.5,
+        reviewCount: 234
+      },
+      {
+        id: 17,
+        name: '鸡爪',
+        category: 'cold',
+        price: 28.0,
+        image: 'https://p11-doubao-search-sign.byteimg.com/labis/2bc77c4a60536a4c53b7d931f227cbe2~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432716&x-signature=VbrEqfYrj%2BW9jMxNCYhojI7W3eI%3D',
+        description: '香辣可口，嚼劲十足',
+        rating: 4.7,
+        reviewCount: 289
+      },
+      {
+        id: 18,
+        name: '面筋',
+        category: 'cold',
+        price: 16.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/labis/b624bf2c78f4ed9d5f6a457853ffedaa~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432716&x-signature=VXu1h2tvb%2F7ltdjMBTa6YGzqiKg%3D',
+        description: '口感劲道，味道鲜美',
+        rating: 4.4,
+        reviewCount: 198
+      },
+      {
+        id: 19,
+        name: '西兰花',
+        category: 'cold',
+        price: 14.0,
+        image: 'https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1316991497323020302~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432756&x-signature=osVpkLCjs1wyeo2%2Fve5AzkfwtIg%3D',
+        description: '清脆爽口，营养健康',
+        rating: 4.3,
+        reviewCount: 176
+      },
+      
+      // 汤类
+      {
+        id: 20,
+        name: '乌鸡汤',
+        category: 'soup',
+        price: 48.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/621455096046813319~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432755&x-signature=n1AJ7MqveQTPLz40E97jnkMYeEc%3D',
+        description: '营养丰富，滋补养生',
+        rating: 4.8,
+        reviewCount: 312
+      },
+      {
+        id: 21,
+        name: '紫菜蛋花汤',
+        category: 'soup',
+        price: 12.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/labis/e07adf4cf82f88a7d75100aad8409189~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432755&x-signature=1qK2TeOgaFWZOJD4dFVKGiuyro4%3D',
+        description: '清淡爽口，老少皆宜',
+        rating: 4.5,
+        reviewCount: 203
+      },
+      {
+        id: 22,
+        name: '排骨汤',
+        category: 'soup',
+        price: 38.0,
+        image: 'https://p11-doubao-search-sign.byteimg.com/labis/954b604f4d2e4d10a4e1d4eccccbaa66~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432782&x-signature=oGNOROiiEpv5cO1ZlllNz%2B6uPJM%3D',
+        description: '汤清味鲜，营养丰富',
+        rating: 4.7,
+        reviewCount: 267
+      },
+      
+      // 主食
+      {
+        id: 23,
+        name: '大米',
+        category: 'staple',
+        price: 3.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1621348934515032076~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432782&x-signature=ssqMpSa562sL4kOei5oPo8T4cwA%3D',
+        description: '优质大米，口感软糯',
+        rating: 4.6,
+        reviewCount: 345
+      },
+      {
+        id: 24,
+        name: '牛肉拉面',
+        category: 'staple',
+        price: 22.0,
+        image: 'https://p3-doubao-search-sign.byteimg.com/labis/1a596d42ec80c73cb1f10bc4f4d4a071~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1790432782&x-signature=WWUwgudEHRZmx2YL6rd77Gi97oY%3D',
+        description: '面条劲道，牛肉香嫩',
+        rating: 4.8,
+        reviewCount: 298
+      }
+    ];
+
+    // 购物车数据
+    let cart = [];
+    const deliveryThreshold = 50; // 免配送费阈值
+    const deliveryFee = 8; // 配送费
+
+    // 初始化菜单
+    function initializeMenu() {
+      const menuContainer = document.getElementById('menu-container');
+      menuContainer.innerHTML = '';
+      
+      menuItems.forEach(item => {
+        const menuItem = createMenuItem(item);
+        menuContainer.appendChild(menuItem);
+      });
+    }
+
+    // 创建菜单项
+    function createMenuItem(item) {
+      const menuItem = document.createElement('div');
+      menuItem.className = `menu-item card-hover bg-white rounded-xl shadow overflow-hidden ${item.category}`;
+      menuItem.setAttribute('data-category', item.category);
+      menuItem.setAttribute('data-aos', 'fade-up');
+      
+      // 创建星级评分HTML
+      function createRatingStars(rating) {
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+        
+        let starsHTML = '';
+        
+        // 添加全星
+        for (let i = 0; i < fullStars; i++) {
+          starsHTML += '<i class="fa fa-star text-yellow-400"></i>';
+        }
+        
+        // 添加半星
+        if (halfStar) {
+          starsHTML += '<i class="fa fa-star-half-o text-yellow-400"></i>';
+        }
+        
+        // 添加空星
+        for (let i = 0; i < emptyStars; i++) {
+          starsHTML += '<i class="fa fa-star-o text-yellow-400"></i>';
+        }
+        
+        return starsHTML;
+      }
+      
+      const ratingHTML = createRatingStars(item.rating);
+      
+      menuItem.innerHTML = `
+        <div class="relative">
+          <img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover">
+          <span class="absolute top-2 right-2 bg-primary text-white text-sm px-2 py-1 rounded-full">
+            ¥${item.price.toFixed(2)}
+          </span>
+          <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded-full flex items-center">
+            <span class="mr-1">${item.rating.toFixed(1)}</span>
+            <i class="fa fa-star text-yellow-400"></i>
+          </div>
+        </div>
+        <div class="p-4">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="text-lg font-semibold">${item.name}</h3>
+            <div class="flex items-center text-sm">
+              <div class="flex mr-1">
+                ${ratingHTML}
+              </div>
+              <span class="text-gray-500">(${item.reviewCount})</span>
+            </div>
+          </div>
+          <p class="text-gray-600 text-sm mb-4">${item.description}</p>
+          <button class="add-to-cart-btn btn-primary w-full" data-id="${item.id}">
+            <i class="fa fa-plus mr-1"></i> 加入购物车
+          </button>
+        </div>
+      `;
+      
+      return menuItem;
+    }
+
+    // 初始化事件监听
+    function initializeEventListeners() {
+      // 移动端菜单按钮点击事件
+      document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenu.classList.toggle('hidden');
+      });
+      
+      // 购物车按钮点击事件
+      document.getElementById('cart-btn').addEventListener('click', function() {
+        document.getElementById('cart-drawer').classList.remove('translate-x-full');
+        document.getElementById('overlay').classList.remove('hidden');
+      });
+      
+      // 关闭购物车按钮点击事件
+      document.getElementById('close-cart-btn').addEventListener('click', function() {
+        document.getElementById('cart-drawer').classList.add('translate-x-full');
+        document.getElementById('overlay').classList.add('hidden');
+      });
+      
+      // 开始购物按钮点击事件
+      document.getElementById('start-shopping-btn').addEventListener('click', function() {
+        document.getElementById('cart-drawer').classList.add('translate-x-full');
+        document.getElementById('overlay').classList.add('hidden');
+        document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+      });
+      
+      // 遮罩层点击事件
+      document.getElementById('overlay').addEventListener('click', function() {
+        document.getElementById('cart-drawer').classList.add('translate-x-full');
+        document.getElementById('overlay').classList.add('hidden');
+        document.getElementById('checkout-modal').classList.add('hidden');
+      });
+      
+      // 分类按钮点击事件
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          // 移除所有按钮的active状态
+          document.querySelectorAll('.category-btn').forEach(b => {
+            b.classList.remove('active', 'bg-primary', 'text-white');
+            b.classList.add('bg-gray-200');
+          });
+          
+          // 添加当前按钮的active状态
+          this.classList.add('active', 'bg-primary', 'text-white');
+          this.classList.remove('bg-gray-200');
+          
+          // 筛选菜单
+          const category = this.getAttribute('data-category');
+          const menuItems = document.querySelectorAll('.menu-item');
+          
+          menuItems.forEach(item => {
+            if (category === 'all' || item.getAttribute('data-category') === category) {
+              item.classList.remove('hidden');
+            } else {
+              item.classList.add('hidden');
+            }
+          });
+        });
+      });
+      
+      // 添加到购物车按钮点击事件
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('add-to-cart-btn') || e.target.parentElement.classList.contains('add-to-cart-btn')) {
+          const btn = e.target.classList.contains('add-to-cart-btn') ? e.target : e.target.parentElement;
+          const id = parseInt(btn.getAttribute('data-id'));
+          addToCart(id);
+        }
+      });
+      
+      // 结算按钮点击事件
+      document.getElementById('checkout-btn').addEventListener('click', function() {
+        document.getElementById('checkout-modal').classList.remove('hidden');
+        updateCheckoutSummary();
+      });
+      
+      // 关闭结算模态框按钮点击事件
+      document.getElementById('close-checkout-btn').addEventListener('click', function() {
+        document.getElementById('checkout-modal').classList.add('hidden');
+      });
+      
+      // 提交订单按钮点击事件
+      document.getElementById('place-order-btn').addEventListener('click', function() {
+        const address = document.getElementById('delivery-address').value;
+        const phone = document.getElementById('contact-phone').value;
+        const date = document.getElementById('delivery-date').value;
+        const time = document.getElementById('delivery-time').value;
+        const notes = document.getElementById('order-notes').value;
+        
+        if (!address) {
+          alert('请输入送餐地址');
+          return;
+        }
+        
+        if (!phone) {
+          alert('请输入联系方式');
+          return;
+        }
+        
+        // 准备邮件参数
+        const orderItems = cart.map(item => `${item.name} x ${item.quantity} - ¥${(item.price * item.quantity).toFixed(2)}`).join('\n');
+        const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        const delivery = subtotal >= deliveryThreshold ? 0 : deliveryFee;
+        const total = subtotal + delivery;
+        
+        const params = {
+          address: address,
+          phone: phone,
+          date: date,
+          time: time,
+          notes: notes || '无',
+          order_items: orderItems,
+          subtotal: subtotal.toFixed(2),
+          delivery_fee: delivery.toFixed(2),
+          total: total.toFixed(2),
+          order_time: new Date().toLocaleString('zh-CN')
+        };
+        
+        // 发送邮件
+        try {
+          console.log('开始发送邮件，参数:', params);
+          emailjs.send('service_dw7itwp', 'template_eizenoa', params)
+            .then(function(response) {
+              console.log('邮件发送成功:', response);
+              alert('订单已提交，邮件已发送到1295039210@qq.com');
+            }, function(error) {
+              console.log('邮件发送失败:', error);
+              alert('订单已提交，但邮件发送失败: ' + JSON.stringify(error));
+            });
+        } catch (error) {
+          console.log('邮件发送出错:', error);
+          alert('订单已提交，但邮件发送出错: ' + error.message);
+        }
+        
+        // 显示订单确认模态框
+        document.getElementById('checkout-modal').classList.add('hidden');
+        document.getElementById('order-confirm-modal').classList.remove('hidden');
+        
+        // 开始倒计时
+        startOrderCountdown();
+        
+        // 清空购物车
+        cart = [];
+        updateCartUI();
+      });
+      
+      // 取消订单按钮点击事件
+      document.getElementById('cancel-order-btn').addEventListener('click', function() {
+        document.getElementById('order-confirm-modal').classList.add('hidden');
+      });
+      
+      // 查看订单按钮点击事件
+      document.getElementById('view-order-btn').addEventListener('click', function() {
+        document.getElementById('order-confirm-modal').classList.add('hidden');
+        // 显示订单详情
+        let orderDetails = '订单详情：\n';
+        orderDetails += '送餐地址：' + document.getElementById('delivery-address').value + '\n';
+        orderDetails += '联系方式：' + document.getElementById('contact-phone').value + '\n';
+        orderDetails += '送餐时间：' + document.getElementById('delivery-date').value + ' ' + document.getElementById('delivery-time').value + '\n';
+        orderDetails += '备注：' + (document.getElementById('order-notes').value || '无') + '\n';
+        orderDetails += '下单时间：' + new Date().toLocaleString('zh-CN') + '\n\n';
+        
+        orderDetails += '订单商品：\n';
+        cart.forEach(item => {
+          orderDetails += '- ' + item.name + ' x ' + item.quantity + ' - ¥' + (item.price * item.quantity).toFixed(2) + '\n';
+        });
+        
+        const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        const delivery = subtotal >= deliveryThreshold ? 0 : deliveryFee;
+        const total = subtotal + delivery;
+        
+        orderDetails += '\n金额明细：\n';
+        orderDetails += '- 商品总价：¥' + subtotal.toFixed(2) + '\n';
+        orderDetails += '- 配送费：¥' + delivery.toFixed(2) + '\n';
+        orderDetails += '- 总计：¥' + total.toFixed(2);
+        
+        alert(orderDetails);
+      });
+    }
+
+    // 添加商品到购物车
+    function addToCart(id) {
+      const item = menuItems.find(item => item.id === id);
+      
+      if (!item) return;
+      
+      const cartItem = cart.find(item => item.id === id);
+      
+      if (cartItem) {
+        cartItem.quantity += 1;
+      } else {
+        cart.push({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          quantity: 1
+        });
+      }
+      
+      updateCartUI();
+      
+      // 显示添加成功提示
+      const toast = document.createElement('div');
+      toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+      toast.textContent = '已添加到购物车';
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 2000);
+    }
+
+    // 更新购物车UI
+    function updateCartUI() {
+      const cartCount = document.getElementById('cart-count');
+      const cartList = document.getElementById('cart-list');
+      const emptyCart = document.getElementById('empty-cart');
+      const cartSummary = document.getElementById('cart-summary');
+      const subtotalElement = document.getElementById('subtotal');
+      const deliveryFeeElement = document.getElementById('delivery-fee');
+      const totalElement = document.getElementById('total');
+      
+      // 更新购物车数量
+      cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+      
+      // 更新购物车列表
+      if (cart.length === 0) {
+        cartList.classList.add('hidden');
+        emptyCart.classList.remove('hidden');
+        cartSummary.classList.add('hidden');
+      } else {
+        cartList.classList.remove('hidden');
+        emptyCart.classList.add('hidden');
+        cartSummary.classList.remove('hidden');
+        
+        // 清空购物车列表
+        cartList.innerHTML = '';
+        
+        // 添加购物车商品
+        cart.forEach(item => {
+          const cartItem = document.createElement('div');
+          cartItem.className = 'flex items-center border-b pb-4';
+          cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg mr-4">
+            <div class="flex-1">
+              <h3 class="font-semibold">${item.name}</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-bold">¥${item.price.toFixed(2)}</span>
+                <div class="flex items-center">
+                  <button class="decrease-quantity px-2 py-1 border rounded-l-lg" data-id="${item.id}">-</button>
+                  <span class="px-3 py-1 border-t border-b">${item.quantity}</span>
+                  <button class="increase-quantity px-2 py-1 border rounded-r-lg" data-id="${item.id}">+</button>
+                </div>
+              </div>
+            </div>
+            <button class="remove-item ml-2 text-gray-400 hover:text-red-500" data-id="${item.id}">
+              <i class="fa fa-trash"></i>
+            </button>
+          `;
+          
+          cartList.appendChild(cartItem);
+        });
+        
+        // 添加数量增减和删除按钮事件监听
+        document.querySelectorAll('.decrease-quantity').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const id = parseInt(this.getAttribute('data-id'));
+            decreaseQuantity(id);
+          });
+        });
+        
+        document.querySelectorAll('.increase-quantity').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const id = parseInt(this.getAttribute('data-id'));
+            increaseQuantity(id);
+          });
+        });
+        
+        document.querySelectorAll('.remove-item').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const id = parseInt(this.getAttribute('data-id'));
+            removeFromCart(id);
+          });
+        });
+      }
+      
+      // 计算小计
+      const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+      subtotalElement.textContent = `¥${subtotal.toFixed(2)}`;
+      
+      // 计算配送费
+      const delivery = subtotal >= deliveryThreshold ? 0 : deliveryFee;
+      deliveryFeeElement.textContent = `¥${delivery.toFixed(2)}`;
+      
+      // 计算总计
+      const total = subtotal + delivery;
+      totalElement.textContent = `¥${total.toFixed(2)}`;
+    }
+
+    // 减少商品数量
+    function decreaseQuantity(id) {
+      const cartItem = cart.find(item => item.id === id);
+      
+      if (cartItem) {
+        if (cartItem.quantity > 1) {
+          cartItem.quantity -= 1;
+        } else {
+          cart = cart.filter(item => item.id !== id);
+        }
+        
+        updateCartUI();
+      }
+    }
+
+    // 增加商品数量
+    function increaseQuantity(id) {
+      const cartItem = cart.find(item => item.id === id);
+      
+      if (cartItem) {
+        cartItem.quantity += 1;
+        updateCartUI();
+      }
+    }
+
+    // 从购物车移除商品
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCartUI();
+    }
+
+    // 更新结算摘要
+    function updateCheckoutSummary() {
+      const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+      const delivery = subtotal >= deliveryThreshold ? 0 : deliveryFee;
+      const total = subtotal + delivery;
+      
+      document.getElementById('checkout-subtotal').textContent = `¥${subtotal.toFixed(2)}`;
+      document.getElementById('checkout-delivery-fee').textContent = `¥${delivery.toFixed(2)}`;
+      document.getElementById('checkout-total').textContent = `¥${total.toFixed(2)}`;
+    }
+
+    // 开始订单倒计时
+    function startOrderCountdown() {
+      let minutes = 14;
+      let seconds = 59;
+      const countdownElement = document.getElementById('order-countdown');
+      const progressElement = document.getElementById('order-progress');
+      
+      countdownElement.textContent = `15:00`;
+      
+      const interval = setInterval(() => {
+        seconds--;
+        
+        if (seconds < 0) {
+          minutes--;
+          seconds = 59;
+        }
+        
+        if (minutes < 0) {
+          clearInterval(interval);
+          document.getElementById('order-confirm-modal').classList.add('hidden');
+          alert('订单已自动确认！');
+          return;
+        }
+        
+        countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        // 更新进度条
+        const totalSeconds = 15 * 60;
+        const remainingSeconds = minutes * 60 + seconds;
+        const progress = (remainingSeconds / totalSeconds) * 100;
+        progressElement.style.width = `${progress}%`;
+      }, 1000);
+    }
+  </script>
+
+</body></html>
